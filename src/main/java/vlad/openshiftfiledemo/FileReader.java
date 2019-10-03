@@ -1,5 +1,6 @@
 package vlad.openshiftfiledemo;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
@@ -12,6 +13,10 @@ import java.net.URL;
 
 @Component
 public class FileReader {
+
+
+    @Value("${message}")
+    private String message;
 
     @PostConstruct
     public void read() throws IOException {
@@ -27,6 +32,15 @@ public class FileReader {
 
             System.out.println("Resource: fileName - " + filename + ", URI: " + uri + ", URL: " + url + ", exists: " + res.exists() + ", isFile: " + res.isFile());
         }
+        System.out.println(message);
 
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }
