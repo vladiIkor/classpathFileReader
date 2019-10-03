@@ -14,7 +14,6 @@ import java.net.URL;
 @Component
 public class FileReader {
 
-
     @Value("${message}")
     private String message;
 
