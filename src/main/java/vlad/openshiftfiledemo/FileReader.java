@@ -7,9 +7,10 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.io.IOException;
+import java.io.*;
 import java.net.URI;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 @Component
 public class FileReader {
@@ -28,10 +29,27 @@ public class FileReader {
             String filename = res.getFilename();
             URI uri = res.getURI();
             URL url = res.getURL();
-
+            System.out.println("----------- known_hosts -----------");
             System.out.println("Resource: fileName - " + filename + ", URI: " + uri + ", URL: " + url + ", exists: " + res.exists() + ", isFile: " + res.isFile());
+
+            if (filename.equals("known_hosts")) {
+                displayFileContent(res);
+            }
+            System.out.println("------------------------------------");
         }
         System.out.println(message);
+
+    }
+
+    private void displayFileContent(Resource res) {
+        try {
+            InputStream is = res.getInputStream();
+            Reader reader = new InputStreamReader(is, StandardCharsets.UTF_8.newDecoder());
+            BufferedReader br = new BufferedReader(reader);
+            br.lines().forEach(line -> System.out.println(line));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
