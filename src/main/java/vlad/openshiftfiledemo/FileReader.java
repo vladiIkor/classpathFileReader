@@ -29,13 +29,13 @@ public class FileReader {
             String filename = res.getFilename();
             URI uri = res.getURI();
             URL url = res.getURL();
-            System.out.println("----------- known_hosts -----------");
             System.out.println("Resource: fileName - " + filename + ", URI: " + uri + ", URL: " + url + ", exists: " + res.exists() + ", isFile: " + res.isFile());
 
             if (filename.equals("known_hosts")) {
+            System.out.println("----------- known_hosts -----------");
                 displayFileContent(res);
-            }
             System.out.println("------------------------------------");
+            }
         }
         System.out.println(message);
 
